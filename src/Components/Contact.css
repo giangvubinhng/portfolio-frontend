@@ -1,0 +1,8 @@
+.contact-cont {
+	align-items: center;
+	display: flex;
+	margin-top: 30px;
+}
+.information {
+	color: rgb(192, 189, 189);
+}
