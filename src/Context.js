@@ -1,26 +1,21 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, {createContext, useState, useEffect} from 'react';
+import * as config from './config.json';
 import axios from 'axios';
 
 export const myContext = createContext({});
 export const myBody = createContext({});
-export default function Context(props){
-    const [userObject, setUserObject] = useState();
+export default function Context(props) {
+	const [userObject, setUserObject] = useState();
+	useEffect(() => {
+		axios.get(`${config.api}/getuser}`, {withCredentials: true}).then((res) => {
+			if (res.data) {
+				setUserObject(res.data);
+			}
+		})
+	}, [])
+	return (
 
-    useEffect(() => {
-        axios.get("https://myportfolioq.herokuapp.com/getuser", {withCredentials: true}).then((res) => {
-            if(res.data)
-            {
-                console.log(res.data);
-                setUserObject(res.data);
-            }
-        })
+		<myContext.Provider value={userObject}>{props.children}</myContext.Provider>
 
-       
-
-    },[])
-    return (
-
-        <myContext.Provider value={userObject}>{props.children}</myContext.Provider>
-
-    )
+	)
 }

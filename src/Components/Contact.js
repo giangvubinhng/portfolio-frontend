@@ -3,6 +3,7 @@ import './Contact.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import * as config from "./../config.json"
 
 const Contact = () => {
   const [state, setState] = useState({
@@ -19,7 +20,7 @@ const Contact = () => {
     event.preventDefault();
 
     axios
-     .post('https://myportfolioq.herokuapp.com/send', { ...state })
+     .post(`${config.api}/send`, { ...state })
      .then(response => {
        setResult(response.data);
        setState({ name: '', email: '', subject: '', message: '' });
