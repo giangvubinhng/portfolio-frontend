@@ -1,21 +1,25 @@
 import React, {createContext, useState, useEffect} from 'react';
-import * as config from './config.json';
 import axios from 'axios';
+import userService from './Services/user.service';
 
-export const myContext = createContext({});
-export const myBody = createContext({});
+export const appContext = createContext({});
 export default function Context(props) {
-	const [userObject, setUserObject] = useState();
+	const intialUserObject = {
+		displayName: '',
+		email: '',
+		isAdmin: false,
+		isLoggedIn: false
+	}
+	const [userObject, setUserObject] = useState(intialUserObject);
 	useEffect(() => {
-		axios.get(`${config.api}/getuser}`, {withCredentials: true}).then((res) => {
-			if (res.data) {
-				setUserObject(res.data);
-			}
-		})
+		async function fetchUser(){
+			const user = await userService.fetchUser();
+			setUserObject(user);
+		}
+		fetchUser()
+		
 	}, [])
 	return (
-
-		<myContext.Provider value={userObject}>{props.children}</myContext.Provider>
-
+		<appContext.Provider value={{user: [userObject, setUserObject]}}>{props.children}</appContext.Provider>
 	)
 }
