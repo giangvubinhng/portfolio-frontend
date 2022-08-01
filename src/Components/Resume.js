@@ -1,6 +1,6 @@
 import React from 'react';
 import './Resume.css';
-import { Container, Col, Row, ProgressBar } from 'react-bootstrap';
+import {Container, Col, Row, ProgressBar} from 'react-bootstrap';
 
 function Resume() {
 	return (

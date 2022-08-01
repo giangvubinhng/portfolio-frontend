@@ -1,35 +1,29 @@
-import React, {useContext} from 'react';
-import '../App.css';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
-import {Navbar, Nav} from 'react-bootstrap';
-import axios from 'axios';
-import {myContext} from '../Context';
-import * as config from './../config.json'
+import {Navbar, Nav, Container} from 'react-bootstrap';
+import {appContext} from '../Context';
 
 
 
 function NavBar() {
 
+	const {user} = useContext(appContext);
 
-	const logout = () => {
-		axios.get(`${config.api}/auth/logout}`, {withCredentials: true}).then(res => {
-			if (res.data === "done") {
-				window.location.href = "/"
-			}
-		})
-	}
-	const context = useContext(myContext);
 	let logState;
-	if (context) {
+	if (user[0].isLoggedIn) {
 		logState =
 			<Link style={{textDecoration: 'none'}} to='/'>
-				<li className="nav-item" onClick={logout}>
+				<li className="nav-item" onClick={() => console.log("out")}>
 					<a className="nav-link">Logout</a>
 				</li>
 			</Link>;
 	}
 	else {
-		logState = null;
+
+		logState = 
+		<Link style={{textDecoration: 'none'}} to='/'>
+			Log in
+		</Link>;
 	}
 
 	return (
@@ -41,19 +35,13 @@ function NavBar() {
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
 					<Link style={{textDecoration: 'none'}} to='/'>
-						<li className="nav-item">
-							<a className="nav-link">Home</a>
-						</li>
+						Home
 					</Link>
 					<Link style={{textDecoration: 'none'}} to='/resume'>
-						<li className="nav-item">
-							<a className="nav-link">Resume</a>
-						</li>
+						Resume
 					</Link>
 					<Link style={{textDecoration: 'none'}} to='/contact'>
-						<li className="nav-item">
-							<a className="nav-link">Contact</a>
-						</li>
+						Contact
 					</Link>
 					{logState}
 				</Nav>

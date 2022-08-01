@@ -2,27 +2,32 @@ import React, {useState, useContext} from 'react';
 import './Admin.css';
 import {Form, Button} from 'react-bootstrap';
 import axios from 'axios';
-import {myBody} from '../FrontPage';
-import * as config from './../config.json'
 
 function Admin() {
-	const body = useContext(myBody);
-	const [state, setState] = useState({
+	const [inputVal, setInputVal] = useState({
 		title: '',
 		info: '',
 		resume: ''
 	});
+	const [resultMessage, setResultMessage] = useState('');
 	const editPost = event => {
 		event.preventDefault();
-		axios.post(`${config.api}/edit`, {...state}).then(response => {console.log(response);}).catch(error => {console.log(error);});
-		window.location.href = "/";
+		axios.put(`${process.env.REACT_APP_API}/api/bio`, {...inputVal}, {withCredentials: true})
+		.then(response => 
+			{
+				setResultMessage(response.message);
+			})
+			.catch(error => 
+			{
+				setResultMessage(error.message);
+			});
 	};
 
 
 	const onInputChange = event => {
 		const {name, value} = event.target;
-		setState({
-			...state,
+		setInputVal({
+			...inputVal,
 			[name]: value
 		});
 
@@ -33,14 +38,14 @@ function Admin() {
 			<form onSubmit={editPost}>
 				<Form.Group controlId="title">
 					<Form.Label>Title</Form.Label>
-					<Form.Control type="text" name="title" value={state.title} placeholder="Please Enter your full name" onChange={onInputChange} />
+					<Form.Control type="text" name="title" value={inputVal.title} placeholder="Please Enter your full name" onChange={onInputChange} />
 				</Form.Group>
 				<Form.Group controlId="info">
 					<Form.Label>Bio</Form.Label>
 					<Form.Control
 						as="textarea"
 						name="info"
-						value={state.info}
+						value={inputVal.info}
 						rows="3"
 						placeholder="Enter your Bio"
 						onChange={onInputChange}
@@ -48,7 +53,7 @@ function Admin() {
 				</Form.Group>
 				<Form.Group controlId="resume">
 					<Form.Label>Title</Form.Label>
-					<Form.Control type="text" name="resume" value={state.resume} placeholder="Link to resume" onChange={onInputChange} />
+					<Form.Control type="text" name="resume" value={inputVal.resume} placeholder="Link to resume" onChange={onInputChange} />
 				</Form.Group>
 				<Button variant="primary" type="submit">
 					Save

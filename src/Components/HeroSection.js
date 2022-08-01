@@ -1,23 +1,45 @@
-import React, { useContext } from 'react';
+import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import './HeroSection.css';
 import '../App.css';
-import axios from 'axios';
-import { Button, Spinner } from 'react-bootstrap';
+import {Button, Spinner} from 'react-bootstrap';
 import ReactRoundedImage from 'react-rounded-image';
 import MyPhoto from '../images/profilepic2.jpeg';
-import { myBody } from '../FrontPage';
+import bioService from '../Services/bio.service'
 
 function HeroSection() {
-	const body = useContext(myBody);
-	function downloadResume() {
-		const url = body.resume;
-		window.open(url, '_blank');
+	const initialBody = {
+		title: '',
+		info: '',
+		resumeLink: ''
+	}
+	const [body, setBody] = useState(initialBody);
+	const [isLoading, setIsLoading] = useState(true);
+	const fetchedBio = useCallback(async () => {
+		setIsLoading(true);
+		const data = await bioService.getBio();
+		if (data.result?.length > 0) {
+			setBody(data.result[0]);
+		}
+		setIsLoading(false);
+	}, []);
+	useEffect(() => {
+		fetchedBio().catch(e => {
+			setIsLoading(false)
+		})
+	}, [])
+
+	function downloadResume(e) {
+		e.preventDefault();
+		if (body.resumeLink !== '') {
+			const url = body.resumeLink;
+			window.open(url, '_blank');
+		}
 	}
 	return (
 		<div className="hero-container">
 			<div className="row-banner">
 				<div className="banner-text">
-					{body ? (
+					{!isLoading ? (
 						<h1>{body.title}</h1>
 					) : (
 						<Spinner animation="border" variant="primary" />
@@ -31,7 +53,7 @@ function HeroSection() {
 						hoverColor="#FFFF"
 					/>
 					<div className="paragraph">
-						{body ? (
+						{!isLoading ? (
 							<p> {body.info} </p>
 						) : (
 							<Spinner animation="border" variant="info" />
