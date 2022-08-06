@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 } */
+.App{
+	height: 100%;
+	width: 100%;
+	background-color: #171717;
+	/*background: rgb(206, 206, 206);*/
+}
+
+.floatingBtnContainer{
+
+  position:fixed;
+  bottom: 20px;
+  right: 120px;
+  cursor:pointer;
+  z-index: 999999;
+
+}
+.manageBtn{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}

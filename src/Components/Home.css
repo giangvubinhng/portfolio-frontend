@@ -1,0 +1,11 @@
+.home-container{
+	width: 100%;
+	height: 100%;
+}
+#about, #projects, #contact{
+	position: relative;
+	z-index: 100;
+}
+.effect-container{
+	position: fixed;
+}

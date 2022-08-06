@@ -1,10 +1,10 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import './HeroSection.css';
 import '../App.css';
-import {Button, Spinner} from 'react-bootstrap';
-import ReactRoundedImage from 'react-rounded-image';
-import MyPhoto from '../images/profilepic2.jpeg';
-import bioService from '../Services/bio.service'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import bioService from '../Services/bio.service';
 
 function HeroSection() {
 	const initialBody = {
@@ -37,41 +37,38 @@ function HeroSection() {
 	}
 	return (
 		<div className="hero-container">
-			<div className="row-banner">
-				<div className="banner-text">
-					{!isLoading ? (
-						<h1>{body.title}</h1>
-					) : (
-						<Spinner animation="border" variant="primary" />
-					)}
-					<ReactRoundedImage
-						image={MyPhoto}
-						roundedColor="#000000"
-						roundedSize="5"
-						imageWidth="150"
-						imageHeight="150"
-						hoverColor="#FFFF"
-					/>
-					<div className="paragraph">
-						{!isLoading ? (
-							<p> {body.info} </p>
-						) : (
-							<Spinner animation="border" variant="info" />
+			<Container fluid="md">
+				<Row>
+					<Col md="auto">
+						{isLoading ? null : (
+							<div className="bio-wrapper">
+								<div className="title-container">
+									<p className="head-t">
+										{body.title}
+									</p>
+									<p className="sub-info">
+										Software Engineer
+									</p>
+								</div>
+							</div>
 						)}
-					</div>
-
-					<div className="hero-btns">
-						<Button
-							className="btns"
-							variant="warning"
-							onClick={downloadResume}
-							target="_blank"
-						>
-							Download Resume <i className="fas fa-download" />
-						</Button>
-					</div>
-				</div>
-			</div>
+					</Col>
+					<Col md="auto">
+						{isLoading ? null : (
+							<div className="bio-wrapper">
+								<div className="info-container">
+									<p>
+										{body.info}
+									</p>
+								</div>
+								<div>
+									<button className="button-48" onClick={downloadResume}><span className="text">Get My Resume</span></button>
+								</div>
+							</div>
+						)}
+					</Col>
+				</Row>
+			</Container>
 		</div>
 	);
 }

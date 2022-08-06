@@ -1,7 +1,8 @@
 import React from 'react';
 import './Login.css';
-import { useState } from 'react';
+import {useState} from 'react';
 import userService from '../Services/user.service';
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {
@@ -29,10 +30,10 @@ const Login = () => {
 		}
 
 		const result = await userService.authenticate(loginInfo);
-		if(result.status === 200){
+		if (result.status === 200) {
 			window.location.href = '/';
 		}
-		else{
+		else {
 			setError(result.message)
 
 		}
@@ -40,7 +41,7 @@ const Login = () => {
 	};
 
 	return (
-		<div className="container">
+		<div className="login-container">
 			<div className="inner">
 				<form onSubmit={onSubmit}>
 					<h3>Log in</h3>
@@ -52,7 +53,7 @@ const Login = () => {
 							name="email"
 							value={inputVal.email}
 							onChange={onInputChange}
-							className="form-control"
+							className="form-control transparent-input"
 							placeholder="Enter email"
 						/>
 					</div>
@@ -64,13 +65,18 @@ const Login = () => {
 							name="password"
 							value={inputVal.password}
 							onChange={onInputChange}
-							className="form-control"
+							className="form-control transparent-input"
 							placeholder="Enter password"
 						/>
 					</div>
-					<button type="submit" className="submit-btn btn btn-dark btn-lg btn-block">
-						Sign in
-					</button>
+					<span>
+						<button type="submit" className="submit-btn btn btn-dark btn-lg btn-block">
+							Sign in
+						</button>
+						<Link to="/">Forgot password</Link>
+
+					</span>
+					<p>Not a member? <Link to="/register">Register</Link></p>
 				</form>
 			</div>
 		</div >

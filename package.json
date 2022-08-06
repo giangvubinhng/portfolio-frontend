@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "https://myportfolioq.herokuapp.com/",
   "dependencies": {
+    "@devil7softwares/react-drifter-stars": "^1.0.3",
     "@fortawesome/fontawesome-free": "^6.1.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
@@ -20,6 +21,7 @@
     "react-rounded-image": "^2.0.13",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-tsparticles": "^2.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -1,28 +1,32 @@
-import React, {useState, useContext} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import './Admin.css';
 import {Form, Button} from 'react-bootstrap';
-import axios from 'axios';
+import bioService from '../Services/bio.service';
 
 function Admin() {
 	const [inputVal, setInputVal] = useState({
 		title: '',
 		info: '',
-		resume: ''
+		resumeLink: ''
 	});
 	const [resultMessage, setResultMessage] = useState('');
-	const editPost = event => {
-		event.preventDefault();
-		axios.put(`${process.env.REACT_APP_API}/api/bio`, {...inputVal}, {withCredentials: true})
-		.then(response => 
-			{
-				setResultMessage(response.message);
-			})
-			.catch(error => 
-			{
-				setResultMessage(error.message);
-			});
-	};
 
+
+	const fetchedBio = useCallback(async () => {
+		const data = await bioService.getBio();
+		if (data.result?.length > 0) {
+			const bio = data.result[0];
+			setInputVal({
+				title: bio.title ? bio.title : inputVal.title,
+				info: bio.info ? bio.info : inputVal.info,
+				resumeLink: bio.resumeLink ? bio.resumeLink : inputVal.resumeLink,
+			})
+		}
+	}, []);
+
+	useEffect(() => {
+		fetchedBio()
+	}, [])
 
 	const onInputChange = event => {
 		const {name, value} = event.target;
@@ -32,8 +36,23 @@ function Admin() {
 		});
 
 	};
+
+	const editPost = event => {
+		event.preventDefault();
+		bioService.editBio(inputVal)
+		.then(response => 
+			{
+				setResultMessage(response.message);
+			})
+			.catch(error => 
+			{
+				setResultMessage(error.response.data.message);
+			});
+	};
 	return (
-		<div className="col-md-6 offset-md-3">
+		<div className="admin-container">
+
+		<div className="col-md-6">
 			<h1>Welcome to admin page!</h1>
 			<form onSubmit={editPost}>
 				<Form.Group controlId="title">
@@ -53,12 +72,16 @@ function Admin() {
 				</Form.Group>
 				<Form.Group controlId="resume">
 					<Form.Label>Title</Form.Label>
-					<Form.Control type="text" name="resume" value={inputVal.resume} placeholder="Link to resume" onChange={onInputChange} />
+					<Form.Control type="text" name="resumeLink" value={inputVal.resumeLink} placeholder="Link to resume" onChange={onInputChange} />
 				</Form.Group>
 				<Button variant="primary" type="submit">
 					Save
 				</Button>
 			</form>
+			<p>
+			{resultMessage}
+			</p>
+		</div>
 		</div>
 
 

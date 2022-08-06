@@ -1,0 +1,19 @@
+.skills-container{
+	padding: 4rem;
+	border-bottom: 1px solid white;
+}
+.skill-title{
+	text-align: center;
+	font-family: 'IBM Plex Mono', monospace;
+	color: #edede9;
+}
+.skills-info{
+	align-items: center;
+	justify-content: center;
+	font-family: 'IBM Plex Mono', monospace;
+	color: #edede9;
+
+}
+.code-list{
+	padding: 4rem;
+}

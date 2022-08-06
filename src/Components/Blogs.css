@@ -1,0 +1,45 @@
+
+.blogs-container{
+    width: 100%;
+	min-height: 100vh;
+}
+
+.posts-container{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 11rem;
+}
+
+.post-button {
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: transparent;
+    width: 200px;
+    border: 0;
+    border-bottom: 1px solid white;
+    border-radius: 5px;
+    margin: 10px;
+    
+}
+.post-button:hover{
+    background-color: #0001;
+}
+
+.post{
+    height: auto;
+    margin: 10px;
+    background-color: rgba(54, 54, 54, 0.133);
+    box-shadow: 0 0.5rem 0.5rem rgba(0,0,0, .6);
+    border-radius: .8rem;
+}
+.post-title{
+    color: #fe524f;
+}
+.post-description{
+    color: white;
+
+}
+.post-info{
+    color: grey;
+}

@@ -23,6 +23,17 @@ async function register(userInfo){
 	}
 }
 
+async function logOut(){
+
+	try{
+		const results = await axios.get(`${process.env.REACT_APP_API}/api/user/logout`, {withCredentials: true});
+		return results.data;
+	}catch(e){
+		return e.response.data;
+	}
+
+}
+
 async function fetchUser(){
     try{
 	    const results = await axios.get(`${process.env.REACT_APP_API}/api/user`, {withCredentials: true})
@@ -33,4 +44,4 @@ async function fetchUser(){
     }
 }
 
-export default {authenticate, register, fetchUser}
+export default {authenticate, register, fetchUser, logOut}
