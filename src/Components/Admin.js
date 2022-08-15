@@ -42,7 +42,7 @@ function Admin() {
 		bioService.editBio(inputVal)
 		.then(response => 
 			{
-				setResultMessage(response.message);
+				setResultMessage(response.data.message);
 			})
 			.catch(error => 
 			{

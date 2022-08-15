@@ -6,8 +6,10 @@ function ParseJsonSafe(jsonStr) {
 }
 
 const getItem = (key) => {
+  
 	const itemStr = window.localStorage.getItem(key);
 	return ParseJsonSafe(itemStr);
+
 };
 
 const setItem = (key, value) => {

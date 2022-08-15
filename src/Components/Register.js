@@ -7,11 +7,12 @@ import userService from '../Services/user.service';
 const Register = () => {
 	const [inputVal, setInputVal] = useState({
 		email: '',
+    displayName: '',
 		password: '',
-		rememberMe: false
 	});
 
 	const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('')
 
 	const onInputChange = (e) => {
 		const {name, value} = e.target;
@@ -25,16 +26,16 @@ const Register = () => {
 		e.preventDefault();
 		const loginInfo = {
 			email: inputVal.email,
+      displayName: inputVal.displayName,
 			password: inputVal.password,
 		}
 
-		const result = await userService.authenticate(loginInfo);
+		const result = await userService.register(loginInfo);
 		if (result.status === 200) {
-			window.location.href = '/';
+      setSuccessMessage(result.data.message)
 		}
 		else {
 			setError(result.message)
-
 		}
 
 	};
@@ -45,6 +46,7 @@ const Register = () => {
 				<form onSubmit={onSubmit}>
 					<h3>Sign up</h3>
 					{error !== '' || error !== undefined ? (<p className="errorMessage">{error}</p>) : null}
+					{successMessage !== '' || successMessage !== undefined ? (<p className="errorMessage">{successMessage}</p>) : null}
 					<div className="form-group">
 						<label>Email</label>
 						<input

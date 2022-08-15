@@ -2,7 +2,7 @@ import React from 'react';
 import './Login.css';
 import {useState} from 'react';
 import userService from '../Services/user.service';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -13,6 +13,9 @@ const Login = () => {
 	});
 
 	const [error, setError] = useState('');
+
+  const navigate = useNavigate();
+
 
 	const onInputChange = (e) => {
 		const {name, value} = e.target;
@@ -31,11 +34,10 @@ const Login = () => {
 
 		const result = await userService.authenticate(loginInfo);
 		if (result.status === 200) {
-			window.location.href = '/';
+      navigate('/', {replace: true});
 		}
 		else {
 			setError(result.message)
-
 		}
 
 	};
@@ -73,7 +75,9 @@ const Login = () => {
 						<button type="submit" className="submit-btn btn btn-dark btn-lg btn-block">
 							Sign in
 						</button>
-						<Link to="/">Forgot password</Link>
+            <div className="fgt-password">
+						  <Link to="/" >Forgot password</Link>
+           </div>
 
 					</span>
 					<p>Not a member? <Link to="/register">Register</Link></p>
