@@ -1,25 +1,10 @@
-import React, {createContext, useState, useEffect} from 'react';
-import axios from 'axios';
-import userService from './Services/user.service';
+import React, {createContext, useState} from 'react';
 
 export const appContext = createContext({});
 export default function Context(props) {
-	const intialUserObject = {
-		displayName: '',
-		email: '',
-		isAdmin: false,
-		isLoggedIn: false
-	}
-	const [userObject, setUserObject] = useState(intialUserObject);
-	useEffect(() => {
-		async function fetchUser(){
-			const user = await userService.fetchUser();
-			setUserObject(user);
-		}
-		fetchUser()
-		
-	}, [])
+  const initialShowEffect = true;
+	const [showEffect, setShowEffect] = useState(initialShowEffect);
 	return (
-		<appContext.Provider value={{user: [userObject, setUserObject]}}>{props.children}</appContext.Provider>
+		<appContext.Provider value={{effect: [showEffect, setShowEffect]}}>{props.children}</appContext.Provider>
 	)
 }
