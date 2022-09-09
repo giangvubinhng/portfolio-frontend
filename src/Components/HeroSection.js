@@ -45,7 +45,7 @@ function HeroSection() {
                 <p>In addition, I also spend a lot of "unproductive" time configuring Neovim <img alt="" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/24/000000/external-vim-a-highly-configurable-text-editor-for-efficiently-creating-and-changing-any-kind-of-text-logo-shadow-tal-revivo.png"/> and Arch Linux <img alt="" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/24/000000/external-arch-linux-composed-of-nonfree-and-open-source-software-logo-shadow-tal-revivo.png"/>, or make games with Unity.</p>
               </div>
               <div>
-                <a href="https://drive.google.com/file/d/1hyaK8Wf7RgJxd9X8n7D1GE6vsmY_STQV/view?usp=sharing" target="_blank" rel="noreferrer">
+                <a href="https://drive.google.com/file/d/1PJj-i8g9Q6ooCtXSU8J5kMnAFwH3OJCB/view?usp=sharing" target="_blank" rel="noreferrer">
                   <button className="button-48"><span className="text">Get My Resume</span></button>
                 </a>
               </div>

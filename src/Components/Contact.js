@@ -8,18 +8,10 @@ const Contact = () => {
   const initialInput = {
     name: '',
     email: '',
-    message: ''}
+    message: ''
+  }
   const [input, setInput] = useState(initialInput);
 
-  const [result, setResult] = useState(null);
-
-
-  const sendEmail = event => {
-    event.preventDefault();
-    setResult({success: true, message: "Email has been sent"});
-    setInput(initialInput)
-
-  };
   const onInputChange = event => {
     const { name, value } = event.target;
     setInput({
@@ -35,11 +27,6 @@ const Contact = () => {
         <h1 className="contact-title">{contact} <i className="fas fa-envelope-open-text"></i></h1>
 
         <p className="information">If you have any question or would like to contact me for work, please send me an email by filling out this form. I would love to hear from you!</p>
-        {result && (
-          <p className={`${result.success} ? 'success' : 'error'`}>{result.message}</p>
-        )}
-
-
 
         <form action={`https://formsubmit.co/${process.env.REACT_APP_EMAIL_API_KEY}`} method="POST">
           <Form.Group controlId="name">
