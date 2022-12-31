@@ -26,10 +26,10 @@ function Cards() {
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='images/worldowe.PNG'
-              text=' Worldowe stands for "World Double We", the purpose of this forum is to connect the world together wherever and whenever!'
-              label='Worldowe'
-              path='https://www.worldowe.com/'
+              src='images/stickies.png'
+              text='Stickies, a simple and blazing fast quick note taking app!'
+              label='Worldowe Stickies'
+              path='https://stickies.worldowe.com/'
             />
             <CardItem
               src='images/firestar.PNG'
